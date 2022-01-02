@@ -13,25 +13,56 @@ public class modelControl {
 		
 		File[] directories = new File("Datos").listFiles(File::isDirectory);
 		ArrayList<String> listData = new ArrayList<String>();
+		
 		for (File file : directories) {
 			file.getName();
-			
 			listData.add(file.getName());
 		}
 		
 		return listData;
 	}
 	
+	public ArrayList<Long> getSizeFolder() {
+		
+		File[] directories = new File("Datos").listFiles(File::isDirectory);
+		ArrayList<Long> sizeOfFolders = new ArrayList<Long>();
+		
+		for (File file : directories) {
+			sizeOfFolders.add(getEachSize(file));
+		}
+		
+		return sizeOfFolders;
+	}
 	
-//	public static long folderSize(File directory) {
-//	    long length = 0;
-//	    for (File file : directory.listFiles()) {
-//	        if (file.isFile())
-//	            length += file.length();
-//	        else
-//	            length += folderSize(file);
-//	    }
-//	    return length;
-//	}
-
+	public ArrayList<String> getFilesData() {
+		
+		File[] files = new File("Datos").listFiles(File::isFile);
+		ArrayList<String> listFiles = new ArrayList<String>();
+		
+		for (File file : files) {
+			file.getName();
+			listFiles.add(file.getName());
+		}
+		
+		return listFiles;
+	}
+	
+	private static long getEachSize(File folder) {
+		   
+        long length = 0;
+       
+        File[] files = folder.listFiles();
+ 
+        int count = files.length;
+ 
+        for (int i = 0; i < count; i++) {
+            if (files[i].isFile()) {
+                length += files[i].length();
+            }
+            else {
+                length += getEachSize(files[i]);
+            }
+        }
+        return length;
+	 }
 }

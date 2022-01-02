@@ -17,12 +17,16 @@ public class appController {
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("carpetas", control.getFolderData());
+		model.addAttribute("archivos", control.getFilesData());
+		model.addAttribute("tamanioCarpetas",control.getSizeFolder());
 		return "index";
 	}
 	
 	@GetMapping("/index")
 	public String indexFull(Model model) {
 		model.addAttribute("carpetas", control.getFolderData());
+		model.addAttribute("archivos", control.getFilesData());
+		model.addAttribute("tamanioCarpetas",control.getSizeFolder());
 		return "index";
 	}
 	
